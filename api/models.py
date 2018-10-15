@@ -28,7 +28,7 @@ class Answer(db.Model):
 class Vote(db.Model):
     answer_id = db.Column(db.Integer, db.ForeignKey('answer.id'), primary_key=True)
     user = db.Column(db.String(64), primary_key=True)
-    value = db.Column(db.Text(), db.CheckConstraint('value IN (+1, -1)'), nullable=False)
+    value = db.Column(db.Integer, db.CheckConstraint('value IN (+1, -1)'), nullable=False)
 
     def __repr__(self):
         return '<Vote {}>'.format(self.value)
