@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    depends_on:
+     - db
+    ports:
+     - "5000:5000"
+    environment:
+     - FLASK_APP=app.py
+     - DATABASE_URL=postgresql://postgres:secret@db/postgres
+    volumes:
+     - ./api:/app:rw
+
+  db:
+    image: "postgres:10"
+    environment:
+     - POSTGRES_PASSWORD=secret
+
+  db-admin:
+    image: "dpage/pgadmin4"
+    depends_on:
+     - db
+    ports:
+     - "127.0.0.1:5005:80"
+    environment:
+     - PGADMIN_DEFAULT_EMAIL=admin
+     - PGADMIN_DEFAULT_PASSWORD=admin
