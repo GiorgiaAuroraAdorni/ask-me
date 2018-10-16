@@ -1,4 +1,5 @@
 from app import db
+from flask import url_for
 
 
 class Question(db.Model):
@@ -11,6 +12,19 @@ class Question(db.Model):
 
     def __repr__(self):
         return '<Question {}>'.format(self.title)
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'user': self.user,
+            'title': self.title,
+            'body': self.body,
+            '_links': {
+                #'self': url_for('get_question', id=self.id),
+            }
+        }
+
+        return data
 
 
 class Answer(db.Model):

@@ -8,13 +8,8 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-import models
-
-
-@app.route('/')
-def hello_world():
-    return 'Hello World'
-
+from models import *
+from routes import *
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
