@@ -40,7 +40,8 @@ def upgrade():
     sa.Column('user', sa.String(length=64), nullable=False),
     sa.Column('value', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['answer_id'], ['answer.id'], ),
-    sa.PrimaryKeyConstraint('answer_id', 'user')
+    sa.PrimaryKeyConstraint('answer_id', 'user'),
+    sa.CheckConstraint('value IN (+1, -1)')
     )
     # ### end Alembic commands ###
 
