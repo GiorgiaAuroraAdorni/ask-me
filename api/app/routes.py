@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, url_for
 
 from . import db
 from .errors import bad_request
-from .models import Question, Answer
+from .models import Question, Answer, Vote
 
 bp = Blueprint('api', __name__)
 
@@ -67,4 +67,23 @@ def create_answer():
     response = jsonify(answer.to_dict())
     response.status_code = 201
     response.headers['Location'] = url_for('api.get_answer', id=answer.id)
+    return response
+
+
+@bp.route('/votes', methods=['POST'])
+def vote_answer():
+    data = request.get_json() or {}
+
+    for field in ['answer_id', 'user', 'value']:
+        if field not in data:
+            return bad_request('missing required field "%s"' % field)
+
+    vote = Vote()
+    vote.from_dict(data)
+    db.session.add(vote)
+    db.session.commit()
+
+    response = jsonify(vote.to_dict())
+    response.status_code = 201
+    # response.headers['Location'] = url_for('api.get_answer', id=answer.id)
     return response

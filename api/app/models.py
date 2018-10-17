@@ -1,3 +1,5 @@
+from sqlalchemy import func
+
 from . import db
 from flask import url_for
 
@@ -56,6 +58,10 @@ class Answer(db.Model):
             }
         }
 
+        data['votes'] = [v.to_dict() for v in self.votes]
+
+        data['tot_votes'] = Vote.query.with_entities(func.sum(Vote.value)).scalar()
+
         return data
 
     def from_dict(self, data):
@@ -71,3 +77,20 @@ class Vote(db.Model):
 
     def __repr__(self):
         return '<Vote {}>'.format(self.value)
+
+    def to_dict(self):
+        data = {
+            'answer_id': self.answer_id,
+            'user': self.user,
+            'value': self.value,
+            '_links': {
+            #    'self': url_for('api.get_vote', id=self.id),
+            }
+        }
+
+        return data
+
+    def from_dict(self, data):
+        for field in ['answer_id', 'user', 'value']:
+            if field in data:
+                setattr(self, field, data[field])
