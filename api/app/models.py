@@ -26,6 +26,11 @@ class Question(db.Model):
 
         return data
 
+    def from_dict(self, data):
+        for field in ['id', 'user', 'title', 'body']:
+            if field in data:
+                setattr(self, field, data[field])
+
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -37,6 +42,24 @@ class Answer(db.Model):
 
     def __repr__(self):
         return '<Answer {}>'.format(self.body)
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'user': self.user,
+            'body': self.body,
+            'question_id': self.question_id,
+            '_links': {
+                #'self': url_for('get_answer', id=self.id),
+            }
+        }
+
+        return data
+
+    def from_dict(self, data):
+        for field in ['id', 'user', 'body', 'question_id']:
+            if field in data:
+                setattr(self, field, data[field])
 
 
 class Vote(db.Model):
