@@ -1,15 +1,16 @@
-from app import app
-from flask import jsonify
+from flask import Blueprint, jsonify
 
-@app.route('/')
+from .models import Question
+
+bp = Blueprint('api', __name__)
+
+@bp.route('/')
 def hello_world():
     return 'Hello World'
 
 
-@app.route('/questions/')
+@bp.route('/questions/')
 def list_questions():
-    from models import Question
-
     questions = [ q.to_dict() for q in Question.query.all() ]
 
     return jsonify(questions)

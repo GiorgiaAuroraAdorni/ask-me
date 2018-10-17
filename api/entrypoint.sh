@@ -4,4 +4,4 @@
 flask db upgrade
 
 # Start the server
-exec python app.py
+exec python api.py
