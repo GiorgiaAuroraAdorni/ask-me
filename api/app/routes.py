@@ -29,8 +29,9 @@ def get_question(id):
 def create_question():
     data = request.get_json() or {}
 
-    if 'user' not in data or 'title' not in data or 'body' not in data:
-        return bad_request('must include user, title and body fields')
+    for field in ['user', 'title', 'body']:
+        if field not in data:
+            return bad_request('missing required field "%s"' % field)
 
     question = Question()
     question.from_dict(data)
@@ -54,8 +55,9 @@ def get_answer(id):
 def create_answer():
     data = request.get_json() or {}
 
-    if 'user' not in data or 'body' not in data or 'question_id' not in data:
-        return bad_request('must include user, body and question id')
+    for field in ['user', 'body', 'question_id']:
+        if field not in data:
+            return bad_request('missing required field "%s"' % field)
 
     answer = Answer()
     answer.from_dict(data)
