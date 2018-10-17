@@ -20,7 +20,7 @@ class Question(db.Model):
             'title': self.title,
             'body': self.body,
             '_links': {
-                #'self': url_for('get_question', id=self.id),
+                'self': url_for('api.get_question', id=self.id),
             }
         }
 
@@ -50,7 +50,7 @@ class Answer(db.Model):
             'body': self.body,
             'question_id': self.question_id,
             '_links': {
-                #'self': url_for('get_answer', id=self.id),
+                'self': url_for('api.get_answer', id=self.id),
             }
         }
 
