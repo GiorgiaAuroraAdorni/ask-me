@@ -11,7 +11,7 @@ def hello_world():
     return 'Hello World'
 
 
-@bp.route('/questions/')
+@bp.route('/questions')
 def list_questions():
     questions = [ q.to_dict() for q in Question.query.all() ]
 
