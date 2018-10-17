@@ -13,7 +13,7 @@ def hello_world():
 
 @bp.route('/questions')
 def list_questions():
-    questions = [ q.to_dict() for q in Question.query.all() ]
+    questions = [q.to_dict() for q in Question.query.all()]
 
     return jsonify(questions)
 

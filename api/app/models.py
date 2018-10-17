@@ -24,10 +24,12 @@ class Question(db.Model):
             }
         }
 
+        data['answers'] = [a.to_dict() for a in self.answers]
+
         return data
 
     def from_dict(self, data):
-        for field in ['id', 'user', 'title', 'body']:
+        for field in ['user', 'title', 'body']:
             if field in data:
                 setattr(self, field, data[field])
 
@@ -57,7 +59,7 @@ class Answer(db.Model):
         return data
 
     def from_dict(self, data):
-        for field in ['id', 'user', 'body', 'question_id']:
+        for field in ['user', 'body', 'question_id']:
             if field in data:
                 setattr(self, field, data[field])
 
