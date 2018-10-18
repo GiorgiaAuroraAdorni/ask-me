@@ -22,7 +22,7 @@ def list_questions():
 def get_question(id):
     question = Question.query.get_or_404(id)
 
-    return jsonify(question.to_dict(question.answers))
+    return jsonify(question.to_dict(True))
 
 
 @bp.route('/questions', methods=['POST'])
@@ -38,7 +38,7 @@ def create_question():
     db.session.add(question)
     db.session.commit()
 
-    response = jsonify(question.to_dict(question.answers))
+    response = jsonify(question.to_dict())
     response.status_code = 201
     response.headers['Location'] = url_for('api.get_question', id=question.id)
     return response
@@ -48,7 +48,7 @@ def create_question():
 def get_answer(id):
     answer = Answer.query.get_or_404(id)
 
-    return jsonify(answer.to_dict(answer.votes))
+    return jsonify(answer.to_dict(True))
 
 
 @bp.route('/answers', methods=['POST'])
@@ -64,7 +64,7 @@ def create_answer():
     db.session.add(answer)
     db.session.commit()
 
-    response = jsonify(answer.to_dict(answer.votes))
+    response = jsonify(answer.to_dict())
     response.status_code = 201
     response.headers['Location'] = url_for('api.get_answer', id=answer.id)
     return response
