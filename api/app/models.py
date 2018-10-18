@@ -15,7 +15,7 @@ class Question(db.Model):
     def __repr__(self):
         return '<Question {}>'.format(self.title)
 
-    def to_dict(self):
+    def to_dict(self, answers=False):
         data = {
             'id': self.id,
             'user': self.user,
@@ -26,7 +26,8 @@ class Question(db.Model):
             }
         }
 
-        data['answers'] = [a.to_dict() for a in self.answers]
+        if answers:
+            data['answers'] = [a.to_dict() for a in self.answers]
 
         return data
 
@@ -47,7 +48,7 @@ class Answer(db.Model):
     def __repr__(self):
         return '<Answer {}>'.format(self.body)
 
-    def to_dict(self):
+    def to_dict(self, votes=False):
         data = {
             'id': self.id,
             'user': self.user,
@@ -58,9 +59,10 @@ class Answer(db.Model):
             }
         }
 
-        data['votes'] = [v.to_dict() for v in self.votes]
+        if votes:
+            data['votes'] = [v.to_dict() for v in self.votes]
 
-        data['tot_votes'] = Vote.query.with_entities(func.sum(Vote.value)).scalar()
+            data['tot_votes'] = Vote.query.with_entities(func.sum(Vote.value)).scalar()
 
         return data
 
