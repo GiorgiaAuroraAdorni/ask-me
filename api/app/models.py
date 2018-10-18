@@ -61,8 +61,9 @@ class Answer(db.Model):
 
         if votes:
             data['votes'] = [v.to_dict() for v in self.votes]
-
-            data['tot_votes'] = Vote.query.with_entities(func.sum(Vote.value)).scalar()
+            data['score'] = Vote.query.\
+                                filter_by(answer_id=self.id).\
+                                with_entities(func.sum(Vote.value)).scalar()
 
         return data
 
