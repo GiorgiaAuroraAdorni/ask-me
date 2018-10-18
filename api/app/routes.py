@@ -80,7 +80,7 @@ def vote_answer():
 
     vote = Vote()
     vote.from_dict(data)
-    db.session.add(vote)
+    db.session.merge(vote)
     db.session.commit()
 
     response = jsonify(vote.to_dict())
