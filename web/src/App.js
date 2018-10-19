@@ -38,6 +38,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>AskMe</h1>
+        <CreateQuestion />
         {questions}
       </div>
     );
@@ -45,6 +46,41 @@ class App extends Component {
 }
 
 export default App;
+
+class CreateQuestion extends Component {
+  constructor(props) {
+    super(props);
+
+    this.title = React.createRef();
+    this.body = React.createRef();
+  }
+
+  handleSubmit(event) {
+    const title = this.title.current.value;
+    const body = this.body.current.value;
+
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <div className="CreateQuestion">
+        <h2>Add a new question</h2>
+        <form onSubmit={() => this.handleSubmit()}>
+          <label>
+              Title: <input type="text" ref={this.title}/>
+          </label>
+          <br />
+          <textarea ref={this.body}>
+
+          </textarea>
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    );
+  }
+}
 
 class QuestionList extends Component {
   render() {
@@ -57,10 +93,10 @@ class QuestionList extends Component {
 class Question extends Component {
   render() {
     return (
-        <div className="Question">
-          <h2>{this.props.title} by {this.props.user}</h2>
-          <div>{this.props.body}</div>
-        </div>
+      <div className="Question">
+        <h3>{this.props.title} by {this.props.user}</h3>
+        <div>{this.props.body}</div>
+      </div>
     );
   }
 }
