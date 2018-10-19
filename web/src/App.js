@@ -53,6 +53,8 @@ class CreateQuestion extends Component {
 
         this.title = React.createRef();
         this.body = React.createRef();
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
@@ -66,14 +68,10 @@ class CreateQuestion extends Component {
         return (
             <div className="CreateQuestion">
                 <h2>Add a new question</h2>
-                <form onSubmit={() => this.handleSubmit()}>
-                    <label>
-                        <input type="text" ref={this.title} placeholder="Title…"/>
-                    </label>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" ref={this.title} placeholder="Title…" />
                     <br/>
-                    <textarea ref={this.body} placeholder="Write something…">
-
-          </textarea>
+                    <textarea ref={this.body} placeholder="Write something…" />
                     <br/>
                     <input type="submit" value="Submit"/>
                 </form>

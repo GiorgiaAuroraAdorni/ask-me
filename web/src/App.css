@@ -66,8 +66,9 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none;
+    width: 50%;
 
-    font-size: 14px;
+    font-size: 22px;
     line-height: 20px;
     color: #24292e;
     outline: none;
@@ -86,7 +87,7 @@
     color: #FFFFFF;
     background-color: #4eb5f1;
     text-align: center;
-    transition: all 0.2s;
+    transition: all ease-in-out 0.2s;
 }
 
 .CreateQuestion input[type="submit"]:hover {
