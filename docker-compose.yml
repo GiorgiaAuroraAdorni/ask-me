@@ -27,3 +27,15 @@ services:
     environment:
      - PGADMIN_DEFAULT_EMAIL=admin
      - PGADMIN_DEFAULT_PASSWORD=admin
+
+  web:
+    build: ./web
+    depends_on:
+     - api
+    ports:
+     - "3000:3000"
+    environment:
+     - CHOKIDAR_USEPOLLING=1
+    volumes:
+     - ./web/public:/app/public:rw
+     - ./web/src:/app/src:rw
