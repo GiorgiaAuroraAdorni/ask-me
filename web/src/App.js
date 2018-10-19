@@ -10,6 +10,8 @@ class App extends Component {
             currentUser: null,
             questions: null,
         };
+
+        this.handleLogin = this.handleLogin.bind(this);
     }
 
     componentDidMount() {
@@ -23,7 +25,11 @@ class App extends Component {
     async loadQuestions() {
         const response = await axios.get('http://localhost:5000/questions');
 
-        this.setState({questions: response.data});
+        this.setState({ questions: response.data });
+    }
+
+    handleLogin(username) {
+        this.setState({ currentUser: username });
     }
 
     render() {
@@ -38,6 +44,7 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>AskMe</h1>
+                <Account currentUser={this.state.currentUser} onLogin={this.handleLogin} />
                 <CreateQuestion/>
                 {questions}
             </div>
@@ -46,6 +53,50 @@ class App extends Component {
 }
 
 export default App;
+
+class Account extends Component {
+    render() {
+        const isLoggedIn = (this.props.currentUser !== null);
+
+        if (isLoggedIn) {
+            return <p>Welcome back, {this.props.currentUser}! <a href="#" onClick={() => this.props.onLogin(null)}>Log Out</a></p>
+        } else {
+            return <LoginForm onLogin={this.props.onLogin} />;
+        }
+    }
+}
+
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { username: null };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({username: event.target.value});
+  }
+
+  handleSubmit(event) {
+    this.props.onLogin(this.state.username);
+
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <div className="LoginForm">
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Username" onChange={this.handleChange}/>
+          <input type="submit" value="Log In" />
+        </form>
+      </div>
+    )
+  }
+}
 
 class CreateQuestion extends Component {
     constructor(props) {
