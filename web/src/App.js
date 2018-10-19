@@ -68,10 +68,10 @@ class CreateQuestion extends Component {
                 <h2>Add a new question</h2>
                 <form onSubmit={() => this.handleSubmit()}>
                     <label>
-                        <input type="text" ref={this.title} placeholder="Title.."/>
+                        <input type="text" ref={this.title} placeholder="Title…"/>
                     </label>
                     <br/>
-                    <textarea ref={this.body} placeholder="Write something..">
+                    <textarea ref={this.body} placeholder="Write something…">
 
           </textarea>
                     <br/>
