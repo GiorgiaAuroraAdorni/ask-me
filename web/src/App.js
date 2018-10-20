@@ -175,11 +175,14 @@ class QuestionList extends Component {
 class Question extends Component {
     render() {
         return (
-            <div className="Question">
-                <h3>{this.props.title} </h3>
-                <body>opened by {this.props.user}</body>
-                <h1>{this.props.body}</h1>
-            </div>
+            <article className="Question">
+                <header>
+                    <h3>{this.props.title}</h3>
+                    <h4>opened by {this.props.user}</h4>
+                </header>
+
+                <p>{this.props.body}</p>
+            </article>
         );
     }
 }
