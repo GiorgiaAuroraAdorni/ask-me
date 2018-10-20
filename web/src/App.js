@@ -25,7 +25,12 @@ class App extends Component {
 
     handleLogin(username) {
         this.setState({ currentUser: username });
-        localStorage.setItem('currentUser', username);
+
+        if (username === null) {
+            localStorage.removeItem('currentUser');
+        } else {
+            localStorage.setItem('currentUser', username);
+        }
     }
 
     handleCreateQuestion(question) {
