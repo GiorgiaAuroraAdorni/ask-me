@@ -12,6 +12,7 @@ class App extends Component {
         };
 
         this.handleLogin = this.handleLogin.bind(this);
+        this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
     }
 
     componentDidMount() {
@@ -27,12 +28,24 @@ class App extends Component {
         localStorage.setItem('currentUser', username);
     }
 
+    handleCreateQuestion(question) {
+        question['user'] = this.state.currentUser;
+
+        this.createQuestion(question);
+    }
+
     async loadQuestions() {
         const response = await axios.get('http://localhost:5000/questions');
 
         this.setState({ questions: response.data });
     }
 
+    async createQuestion(question) {
+        const response = await axios.post('http://localhost:5000/questions', question);
+
+        const questions = this.state.questions.concat([ response.data ]);
+        this.setState({ questions });
+    }
 
     render() {
         let createQuestion;
@@ -119,16 +132,21 @@ class CreateQuestion extends Component {
     }
 
     handleSubmit(event) {
-        const title = this.title.current.value;
-        const body = this.body.current.value;
+        const question = {
+            title: this.title.current.value,
+            body: this.body.current.value
+        };
 
+        this.props.onCreate(question);
+
+        event.target.reset();
         event.preventDefault();
     }
 
     render() {
         return (
             <div className="CreateQuestion">
-                <h2>Add a new question</h2>
+                <h2>Ask a new question</h2>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" ref={this.title} placeholder="Title…" />
                     <br/>
