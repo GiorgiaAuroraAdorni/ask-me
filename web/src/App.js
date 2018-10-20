@@ -143,9 +143,14 @@ class CreateQuestion extends Component {
 
 class QuestionList extends Component {
     render() {
-        return this.props.questions.map((question) =>
+        const questionList = this.props.questions.map((question) =>
             <Question key={question.id} {...question} />
         );
+
+        // Display the most recent questions first.
+        questionList.reverse();
+
+        return questionList;
     }
 }
 
