@@ -7,7 +7,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            currentUser: null,
+            currentUser: localStorage.getItem('currentUser') || null,
             questions: null,
         };
 
@@ -22,18 +22,25 @@ class App extends Component {
 
     }
 
+    handleLogin(username) {
+        this.setState({ currentUser: username });
+        localStorage.setItem('currentUser', username);
+    }
+
     async loadQuestions() {
         const response = await axios.get('http://localhost:5000/questions');
 
         this.setState({ questions: response.data });
     }
 
-    handleLogin(username) {
-        this.setState({ currentUser: username });
-    }
 
     render() {
+        let createQuestion;
         let questions;
+
+        if (this.state.currentUser !== null) {
+            createQuestion = <CreateQuestion onCreate={this.handleCreateQuestion} />;
+        }
 
         if (this.state.questions === null) {
             questions = "Loading…";
@@ -45,7 +52,7 @@ class App extends Component {
             <div className="App">
                 <h1>AskMe</h1>
                 <Account currentUser={this.state.currentUser} onLogin={this.handleLogin} />
-                <CreateQuestion/>
+                {createQuestion}
                 {questions}
             </div>
         );
@@ -59,7 +66,10 @@ class Account extends Component {
         const isLoggedIn = (this.props.currentUser !== null);
 
         if (isLoggedIn) {
-            return <p>Welcome back, {this.props.currentUser}! <a href="#" onClick={() => this.props.onLogin(null)}>Log Out</a></p>
+            return <p>
+                Welcome back, <strong>{this.props.currentUser}</strong>! {}
+                <a href="#" onClick={() => this.props.onLogin(null)}>Log Out</a>
+            </p>
         } else {
             return <LoginForm onLogin={this.props.onLogin} />;
         }
