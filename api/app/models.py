@@ -6,9 +6,9 @@ from flask import url_for
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(64), index=True, nullable=False)
-    title = db.Column(db.String(140), nullable=False)
-    body = db.Column(db.Text(), nullable=False)
+    user = db.Column(db.String(64), db.CheckConstraint('length(user) > 0', 'ck_question_user_len'), index=True, nullable=False)
+    title = db.Column(db.String(140), db.CheckConstraint('length(title) > 0', 'ck_question_title_len'), nullable=False)
+    body = db.Column(db.Text(), db.CheckConstraint('length(body) > 0', 'ck_question_body_len'), nullable=True)
 
     answers = db.relationship('Answer', backref='question', lazy=True)
 
@@ -39,8 +39,8 @@ class Question(db.Model):
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(64), index=True, nullable=False)
-    body = db.Column(db.Text(), nullable=False)
+    user = db.Column(db.String(64), db.CheckConstraint('length(user) > 0', 'ck_answer_user_len'), index=True, nullable=False)
+    body = db.Column(db.Text(), db.CheckConstraint('length(body) > 0', 'ck_answer_body_len'), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
 
     votes = db.relationship('Vote', backref='answer', lazy=True)
@@ -75,7 +75,7 @@ class Answer(db.Model):
 
 class Vote(db.Model):
     answer_id = db.Column(db.Integer, db.ForeignKey('answer.id'), primary_key=True)
-    user = db.Column(db.String(64), primary_key=True)
+    user = db.Column(db.String(64), db.CheckConstraint('length(user) > 0', 'ck_vote_user_len'), primary_key=True)
     value = db.Column(db.Integer, db.CheckConstraint('value IN (+1, -1)'), nullable=False)
 
     def __repr__(self):
