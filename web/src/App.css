@@ -51,8 +51,25 @@
     box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
 }
 
-.CreateQuestion input[type="submit"] {
-    margin: 4px 2px;
+.LoginForm input[type="text"] {
+    margin-top: 1em;
+    margin-right: 1em;
+    padding: 7px 7px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    width: 30%;
+
+    font-size: 14px;
+    line-height: 20px;
+    color: #24292e;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
+}
+
+input[type="submit"] {
+    margin: 2px 2px;
     display: inline-block;
     padding: 0.6em 2.4em;
     border: none;
@@ -67,7 +84,7 @@
     transition: all ease-in-out 0.2s;
 }
 
-.CreateQuestion input[type="submit"]:hover {
+input[type="submit"]:hover {
     background-color: #4095c6;
 }
 
@@ -97,8 +114,18 @@
 .Question p {
     box-sizing: border-box;
     font-size: 16px;
-    margin-bottom: 0;
+    margin-bottom: 15;
     font-weight: 300;
     margin-top: 5px;
     line-height: 1.2;
+}
+
+a:link {
+    color: #4095c6;
+    /*text-decoration: none;*/
+}
+
+a:visited {
+    color: #4095c6;
+    /*text-decoration: none;*/
 }

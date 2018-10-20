@@ -162,7 +162,12 @@ class CreateQuestion extends Component {
 class QuestionList extends Component {
     render() {
         const questionList = this.props.questions.map((question) =>
-            <Question key={question.id} {...question} />
+            <div className="QuestionItem">
+                <Question key={question.id} {...question} />
+                 <form onSubmit={this.handleSubmit}>
+                    <input type="submit" value="Read answers"/>
+                 </form>
+            </div>
         );
 
         // Display the most recent questions first.
