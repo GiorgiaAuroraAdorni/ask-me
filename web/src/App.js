@@ -118,7 +118,7 @@ class LoginForm extends Component {
     return (
       <div className="LoginForm">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Username" onChange={this.handleChange}/>
+          <input type="text" placeholder="Username" onChange={this.handleChange} required/>
           <input type="submit" value="Log In" />
         </form>
       </div>
@@ -153,9 +153,9 @@ class CreateQuestion extends Component {
             <div className="CreateQuestion">
                 <h2>Ask a new question</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" ref={this.title} placeholder="Title…" />
+                    <input type="text" ref={this.title} placeholder="Title…" required/>
                     <br/>
-                    <textarea ref={this.body} placeholder="Write something…" />
+                    <textarea ref={this.body} placeholder="Write something…" required/>
                     <br/>
                     <input type="submit" value="Submit"/>
                 </form>
