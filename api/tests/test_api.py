@@ -160,6 +160,7 @@ def test_null_answer_parameter(client):
         create_answer(client, question_id=None)
 
 
+@pytest.mark.filterwarnings('ignore:.*Primary key columns typically may not store NULL')
 def test_null_vote_parameter(client):
     """Create vote with null or empty field doesn't work."""
 
