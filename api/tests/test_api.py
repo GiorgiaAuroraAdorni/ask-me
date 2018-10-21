@@ -29,8 +29,6 @@ def client():
         db.drop_all()
 
 
-def test_hello_world(client):
-    rv = client.get('/')
 def create_question(client, user='anonimo', title='domanda', body='testo domanda'):
 
     question = {
@@ -119,8 +117,6 @@ def test_create_answer_has_votes(client):
     assert json['score'] == 0
 
 
-    assert rv.status_code == 200
-    assert b'Hello World' in rv.data
 def test_fail_create_answer(client):
     """Create answer doesn't work because the question doesn't exist."""
 

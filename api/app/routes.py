@@ -6,10 +6,6 @@ from .models import Question, Answer, Vote
 
 bp = Blueprint('api', __name__)
 
-@bp.route('/')
-def hello_world():
-    return 'Hello World'
-
 
 @bp.route('/questions')
 def list_questions():
