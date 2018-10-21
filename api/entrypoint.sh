@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Exit if any command fails
+set -e
+
 # Ensure that the database schema is up-to-date
 flask db upgrade
 
