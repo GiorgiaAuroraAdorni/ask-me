@@ -23,6 +23,20 @@ def client():
 
 def test_hello_world(client):
     rv = client.get('/')
+def test_create_answer_has_votes(client):
+    """Create answer also create a list of votes and the field score."""
+
+    assert create_question(client).status_code == 201
+
+    answer = create_answer(client)
+
+    assert answer.status_code == 201
+
+    json = answer.get_json()
+
+    assert json['votes'] == []
+    assert json['score'] == 0
+
 
     assert rv.status_code == 200
     assert b'Hello World' in rv.data
