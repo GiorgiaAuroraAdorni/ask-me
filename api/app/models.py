@@ -8,7 +8,7 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(64), db.CheckConstraint('length(user) > 0', 'ck_question_user_len'), index=True, nullable=False)
     title = db.Column(db.String(140), db.CheckConstraint('length(title) > 0', 'ck_question_title_len'), nullable=False)
-    body = db.Column(db.Text(), db.CheckConstraint('length(body) > 0', 'ck_question_body_len'), nullable=True)
+    body = db.Column(db.Text(), db.CheckConstraint('length(body) > 0', 'ck_question_body_len'), nullable=False)
 
     answers = db.relationship('Answer', backref='question', lazy=True)
 
