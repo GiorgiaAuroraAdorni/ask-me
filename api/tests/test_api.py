@@ -1,6 +1,14 @@
 import pytest
 
 from app import create_app, config, db
+from sqlalchemy import engine, event, exc
+
+
+@event.listens_for(engine.Engine, "connect")
+def enforce_foreign_keys(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
 
 
 class TestConfig(config.Config):
