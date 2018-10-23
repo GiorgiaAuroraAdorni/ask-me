@@ -3,8 +3,8 @@ import React, {Component} from "react";
 class QuestionList extends Component {
     render() {
         const questionList = this.props.questions.map((question) =>
-            <div className="QuestionItem">
-                <Question key={question.id} {...question} />
+            <div className="QuestionItem" key={question.id}>
+                <Question {...question} />
                 <form onSubmit={this.handleSubmit}>
                     <input type="submit" value="Read answers"/>
                 </form>
