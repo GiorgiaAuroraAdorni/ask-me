@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
   api:
@@ -29,7 +29,9 @@ services:
      - PGADMIN_DEFAULT_PASSWORD=admin
 
   web:
-    build: ./web
+    build:
+      context: ./web
+      target: dev
     depends_on:
      - api
     ports:
