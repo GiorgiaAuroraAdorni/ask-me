@@ -62,6 +62,8 @@ class Questions extends Component {
     }
 
     componentDidMount() {
+        document.title = 'AskMe';
+
         this.loadQuestions();
     }
 
@@ -124,6 +126,8 @@ class QuestionDetail extends  Component {
         const response = await axios.get('http://localhost:5000/questions/' + id);
 
         this.setState({ question: response.data });
+
+        document.title = 'AskMe — ' + response.data.title;
     }
 
     render() {
