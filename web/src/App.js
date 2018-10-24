@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
+import Account from "./Account";
 import CreateQuestion from "./CreateQuestion";
 import QuestionList from "./QuestionList";
-import Account from "./Account";
 
 class App extends Component {
     constructor(props) {
@@ -11,19 +12,9 @@ class App extends Component {
 
         this.state = {
             currentUser: localStorage.getItem('currentUser') || null,
-            questions: null,
         };
 
         this.handleLogin = this.handleLogin.bind(this);
-        this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
-    }
-
-    componentDidMount() {
-        this.loadQuestions();
-    }
-
-    componentWillUnmount() {
-
     }
 
     handleLogin(username) {
@@ -36,8 +27,46 @@ class App extends Component {
         }
     }
 
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <h1><Link to="/">AskMe</Link></h1>
+                    <Account currentUser={this.state.currentUser} onLogin={this.handleLogin} />
+
+                    <Route
+                        exact path="/"
+                        render={(props) => <Questions {...props} currentUser={this.state.currentUser} />}
+                    />
+                    <Route
+                        path="/questions/:id"
+                        render={(props) => <QuestionDetail {...props} currentUser={this.state.currentUser} />}
+                    />
+                </div>
+            </Router>
+        );
+    }
+}
+
+export default App;
+
+class Questions extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            questions: null,
+        };
+
+        this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
+    }
+
+    componentDidMount() {
+        this.loadQuestions();
+    }
+
     handleCreateQuestion(question) {
-        question['user'] = this.state.currentUser;
+        question['user'] = this.props.currentUser;
 
         this.createQuestion(question);
     }
@@ -59,20 +88,18 @@ class App extends Component {
         let createQuestion;
         let questions;
 
-        if (this.state.currentUser !== null) {
+        if (this.props.currentUser !== null) {
             createQuestion = <CreateQuestion onCreate={this.handleCreateQuestion} />;
         }
 
         if (this.state.questions === null) {
             questions = "Loading…";
         } else {
-            questions = <QuestionList questions={this.state.questions}/>;
+            questions = <QuestionList questions={this.state.questions} />;
         }
 
         return (
-            <div className="App">
-                <h1>AskMe</h1>
-                <Account currentUser={this.state.currentUser} onLogin={this.handleLogin} />
+            <div>
                 {createQuestion}
                 {questions}
             </div>
@@ -80,5 +107,34 @@ class App extends Component {
     }
 }
 
-export default App;
+class QuestionDetail extends  Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            question: null,
+        };
+    }
+
+    componentDidMount() {
+        this.loadQuestion(this.props.match.params.id);
+    }
+
+    async loadQuestion(id) {
+        const response = await axios.get('http://localhost:5000/questions/' + id);
+
+        this.setState({ question: response.data });
+    }
+
+    render() {
+        let question;
+
+        if (this.state.question === null) {
+            question = "Loading…";
+        } else {
+            question = <QuestionList questions={[this.state.question]} />;
+        }
+
+        return question;
+    }
+}
