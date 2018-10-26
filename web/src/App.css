@@ -9,6 +9,10 @@
     font-weight: 900;
 }
 
+.App h1 a {
+    text-decoration: none;
+}
+
 .CreateQuestion textarea {
     width: 50%;
     height: 150px;
