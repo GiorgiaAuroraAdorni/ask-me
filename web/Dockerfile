@@ -13,6 +13,8 @@ CMD ["npm", "start"]
 # PRODUCTION BUILD ENVIRONMENT
 FROM dev AS build
 
+ARG REACT_APP_API_URL
+
 RUN npm run build
 
 # PRODUCTION ENVIRONMENT

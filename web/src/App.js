@@ -1,7 +1,8 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
+
+import api from "./API";
 import Account from "./Account";
 import CreateQuestion from "./CreateQuestion";
 import QuestionList from "./QuestionList";
@@ -61,28 +62,20 @@ class Questions extends Component {
         this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         document.title = 'AskMe';
 
-        this.loadQuestions();
+        const questions = await api.loadQuestions();
+
+        this.setState({ questions });
     }
 
-    handleCreateQuestion(question) {
+    async handleCreateQuestion(question) {
         question['user'] = this.props.currentUser;
 
-        this.createQuestion(question);
-    }
+        const newQuestion = await api.createQuestion(question);
 
-    async loadQuestions() {
-        const response = await axios.get('http://localhost:5000/questions');
-
-        this.setState({ questions: response.data });
-    }
-
-    async createQuestion(question) {
-        const response = await axios.post('http://localhost:5000/questions', question);
-
-        const questions = this.state.questions.concat([ response.data ]);
+        const questions = this.state.questions.concat([ newQuestion ]);
         this.setState({ questions });
     }
 
@@ -118,16 +111,12 @@ class QuestionDetail extends  Component {
         };
     }
 
-    componentDidMount() {
-        this.loadQuestion(this.props.match.params.id);
-    }
+    async componentDidMount() {
+        const id = this.props.match.params.id;
+        const question = await api.loadQuestion(id);
 
-    async loadQuestion(id) {
-        const response = await axios.get('http://localhost:5000/questions/' + id);
-
-        this.setState({ question: response.data });
-
-        document.title = 'AskMe — ' + response.data.title;
+        this.setState({ question });
+        document.title = 'AskMe — ' + question.title;
     }
 
     render() {
