@@ -22,9 +22,11 @@ build_api:
 
 build_web:
   variables:
-    IMAGE_TEST_TAG: $CI_REGISTRY_IMAGE/web:$CI_COMMIT_REF_SLUG
+    IMAGE_DEV_TAG: $CI_REGISTRY_IMAGE/web/dev:$CI_COMMIT_REF_SLUG
+    IMAGE_PROD_TAG: $CI_REGISTRY_IMAGE/web:$CI_COMMIT_REF_SLUG
     IMAGE_RELEASE_TAG: $CI_REGISTRY_IMAGE/web:latest
   script:
-    - docker build -t $IMAGE_TEST_TAG web/
-    - docker run $IMAGE_TEST_TAG npm test
-    - docker push $IMAGE_TEST_TAG
+    - docker build -t $IMAGE_DEV_TAG --target dev web/
+    - docker run $IMAGE_DEV_TAG npm test
+    - docker build -t $IMAGE_PROD_TAG web/
+    - docker push $IMAGE_PROD_TAG
