@@ -4,21 +4,25 @@ class CreateQuestion extends Component {
     constructor(props) {
         super(props);
 
-        this.title = React.createRef();
-        this.body = React.createRef();
+        this.state = {title: '', body: ''};
 
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    handleChange(event) {
+        const state = {};
+
+        state[event.target.name] = event.target.value;
+
+        this.setState(state);
+    }
+
     handleSubmit(event) {
-        const question = {
-            title: this.title.current.value,
-            body: this.body.current.value
-        };
+        this.props.onCreate(this.state);
 
-        this.props.onCreate(question);
+        this.setState({title: '', body: ''});
 
-        event.target.reset();
         event.preventDefault();
     }
 
@@ -27,9 +31,9 @@ class CreateQuestion extends Component {
             <div className="CreateQuestion">
                 <h2>Ask a new question</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" ref={this.title} placeholder="Title…" required/>
+                    <input type="text" name="title" value={this.state.title} placeholder="Title…" onChange={this.handleChange} required/>
                     <br/>
-                    <textarea ref={this.body} placeholder="Write something…" required/>
+                    <textarea name="body" value={this.state.body} placeholder="Write something…" onChange={this.handleChange} required/>
                     <br/>
                     <input type="submit" value="Submit"/>
                 </form>

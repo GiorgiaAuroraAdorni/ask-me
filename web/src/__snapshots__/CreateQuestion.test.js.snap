@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateQuestion renders correctly 1`] = `
+<div
+  className="CreateQuestion"
+>
+  <h2>
+    Ask a new question
+  </h2>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="title"
+      onChange={[Function]}
+      placeholder="Title…"
+      required={true}
+      type="text"
+      value=""
+    />
+    <br />
+    <textarea
+      name="body"
+      onChange={[Function]}
+      placeholder="Write something…"
+      required={true}
+      value=""
+    />
+    <br />
+    <input
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+`;
