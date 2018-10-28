@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<p>
+  Welcome back, 
+  <strong>
+    Giorgia
+  </strong>
+  ! 
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    Log Out
+  </a>
+</p>
+`;
+
+exports[`renders correctly 2`] = `<LoginForm />`;
