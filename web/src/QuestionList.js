@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
+import Question from "./Question";
+
 class QuestionList extends Component {
     render() {
         const questionList = this.props.questions.map((question) =>
@@ -20,18 +22,3 @@ class QuestionList extends Component {
 }
 
 export default QuestionList;
-
-class Question extends Component {
-    render() {
-        return (
-            <article className="Question">
-                <header>
-                    <h3>{this.props.title}</h3>
-                    <h4>opened by {this.props.user}</h4>
-                </header>
-
-                <p>{this.props.body}</p>
-            </article>
-        );
-    }
-}

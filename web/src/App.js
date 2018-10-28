@@ -6,6 +6,7 @@ import api from "./API";
 import Account from "./Account";
 import CreateQuestion from "./CreateQuestion";
 import QuestionList from "./QuestionList";
+import Question from "./Question";
 
 class App extends Component {
     constructor(props) {
@@ -125,7 +126,7 @@ class QuestionDetail extends  Component {
         if (this.state.question === null) {
             question = "Loading…";
         } else {
-            question = <QuestionList questions={[this.state.question]} />;
+            question = <Question {...this.state.question} />;
         }
 
         return question;
