@@ -27,6 +27,6 @@ build_web:
     IMAGE_RELEASE_TAG: $CI_REGISTRY_IMAGE/web:latest
   script:
     - docker build -t $IMAGE_DEV_TAG --target dev web/
-    - docker run $IMAGE_DEV_TAG npm test
+    - docker run -e CI $IMAGE_DEV_TAG npm test
     - docker build -t $IMAGE_PROD_TAG web/
     - docker push $IMAGE_PROD_TAG
