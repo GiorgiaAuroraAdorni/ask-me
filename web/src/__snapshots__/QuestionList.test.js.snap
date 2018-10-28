@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuestionList renders correctly 1`] = `
+Array [
+  <div
+    className="QuestionItem"
+    key="2"
+  >
+    <Question
+      _links={
+        Object {
+          "self": "questions/3",
+        }
+      }
+      body="un po di testo"
+      id={2}
+      title="un titolo"
+      user="qualcuno"
+    />
+    <Link
+      replace={false}
+      to="questions/3"
+    >
+      <button>
+        Read answers
+      </button>
+    </Link>
+  </div>,
+  <div
+    className="QuestionItem"
+    key="2"
+  >
+    <Question
+      _links={
+        Object {
+          "self": "questions/2",
+        }
+      }
+      body="corpo di un'altra domanda"
+      id={2}
+      title="titolo di un'altra domanda"
+      user="anonimo"
+    />
+    <Link
+      replace={false}
+      to="questions/2"
+    >
+      <button>
+        Read answers
+      </button>
+    </Link>
+  </div>,
+  <div
+    className="QuestionItem"
+    key="1"
+  >
+    <Question
+      _links={
+        Object {
+          "self": "questions/1",
+        }
+      }
+      body="corpo della domanda"
+      id={1}
+      title="titolo della domanda"
+      user="utente"
+    />
+    <Link
+      replace={false}
+      to="questions/1"
+    >
+      <button>
+        Read answers
+      </button>
+    </Link>
+  </div>,
+]
+`;
