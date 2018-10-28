@@ -30,6 +30,7 @@ exports[`LoginForm renders correctly 1`] = `
       placeholder="Username"
       required={true}
       type="text"
+      value=""
     />
     <input
       type="submit"

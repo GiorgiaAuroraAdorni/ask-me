@@ -21,7 +21,7 @@ class LoginForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {username: null};
+        this.state = {username: ''};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +41,7 @@ class LoginForm extends Component {
         return (
             <div className="LoginForm">
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="Username" onChange={this.handleChange} required/>
+                    <input type="text" value={this.state.username} placeholder="Username" onChange={this.handleChange} required/>
                     <input type="submit" value="Log In"/>
                 </form>
             </div>
