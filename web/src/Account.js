@@ -48,3 +48,5 @@ class LoginForm extends Component {
         )
     }
 }
+
+export { LoginForm };

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Account renders correctly 1`] = `
 <p>
   Welcome back, 
   <strong>
@@ -16,4 +16,25 @@ exports[`renders correctly 1`] = `
 </p>
 `;
 
-exports[`renders correctly 2`] = `<LoginForm />`;
+exports[`Account renders correctly 2`] = `<LoginForm />`;
+
+exports[`LoginForm renders correctly 1`] = `
+<div
+  className="LoginForm"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      onChange={[Function]}
+      placeholder="Username"
+      required={true}
+      type="text"
+    />
+    <input
+      type="submit"
+      value="Log In"
+    />
+  </form>
+</div>
+`;
