@@ -13,7 +13,7 @@
     text-decoration: none;
 }
 
-.CreateQuestion textarea {
+textarea {
     width: 50%;
     height: 150px;
     margin-top: 1em;
@@ -39,7 +39,7 @@
     word-wrap: break-word;
 }
 
-.CreateQuestion input[type="text"] {
+input[type="text"] {
     margin-top: 1em;
     padding: 7px 7px;
     box-sizing: border-box;

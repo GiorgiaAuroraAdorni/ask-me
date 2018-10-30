@@ -7,6 +7,7 @@ import Account from "./Account";
 import CreateQuestion from "./CreateQuestion";
 import QuestionList from "./QuestionList";
 import Question from "./Question";
+import AnswerList from "./AnswerList";
 
 class App extends Component {
     constructor(props) {
@@ -103,12 +104,13 @@ class Questions extends Component {
     }
 }
 
-class QuestionDetail extends  Component {
+class QuestionDetail extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             question: null,
+            answers: null,
         };
     }
 
@@ -122,13 +124,38 @@ class QuestionDetail extends  Component {
 
     render() {
         let question;
+        let answers;
 
         if (this.state.question === null) {
             question = "Loading…";
+
         } else {
             question = <Question {...this.state.question} />;
-        }
+            answers = <AnswerList answers={this.state.question.answers}/>;
 
+            return (
+                <div>
+                    {question}
+                    <h2>Answers</h2>
+
+                    <div className="LoginForm">
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" value={this.state.username} placeholder="Username"
+                                   onChange={this.handleChange} required/>
+                            <br/>
+                            <textarea name="body" value={this.state.body} placeholder="Write something…"
+                                      onChange={this.handleChange} required/>
+                            <br/>
+                            <input type="submit" value="Submit"/>
+                        </form>
+
+                    </div>
+
+
+                    {answers}
+                </div>
+            );
+        }
         return question;
     }
 }
