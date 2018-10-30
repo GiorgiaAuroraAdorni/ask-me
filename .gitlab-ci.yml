@@ -25,8 +25,9 @@ build_web:
     IMAGE_DEV_TAG: $CI_REGISTRY_IMAGE/web/dev:$CI_COMMIT_REF_SLUG
     IMAGE_PROD_TAG: $CI_REGISTRY_IMAGE/web:$CI_COMMIT_REF_SLUG
     IMAGE_RELEASE_TAG: $CI_REGISTRY_IMAGE/web:latest
+    IMAGE_PROD_ARGS: REACT_APP_API_URL=http://api.askme.cereda.me/
   script:
     - docker build -t $IMAGE_DEV_TAG --target dev web/
     - docker run -e CI $IMAGE_DEV_TAG npm test
-    - docker build -t $IMAGE_PROD_TAG web/
+    - docker build -t $IMAGE_PROD_TAG --build-arg $IMAGE_PROD_ARGS web/
     - docker push $IMAGE_PROD_TAG
