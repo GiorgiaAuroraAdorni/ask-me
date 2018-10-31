@@ -11,10 +11,22 @@ class Vote extends Component {
     render() {
         const isLoggedIn = (this.props.currentUser !== null);
 
+        let upvote;
+        let downvote;
+
+        if (isLoggedIn) {
+            const vote = this.props.votes.find((v) => v.user === this.props.currentUser);
+
+            if (vote) {
+                upvote = (vote.value === +1) ? 'selected' : '';
+                downvote = (vote.value === -1) ? 'selected' : '';
+            }
+        }
+
         return (
             <div className="Vote">
-                <button disabled={!isLoggedIn} onClick={() => this.handleClick(+1)}>⬆︎</button>
-                <button disabled={!isLoggedIn} onClick={() => this.handleClick(-1)}>⬇︎</button>
+                <button className={upvote} disabled={!isLoggedIn} onClick={() => this.handleClick(+1)}>⬆︎</button>
+                <button className={downvote} disabled={!isLoggedIn} onClick={() => this.handleClick(-1)}>⬇︎</button>
 
                 {this.props.score} votes
             </div>

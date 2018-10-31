@@ -12,7 +12,7 @@ class Answer extends Component {
 
                 <p>{this.props.body}</p>
 
-                <Vote currentUser={this.props.currentUser} answerId={this.props.id} score={this.props.score} onVote={this.props.onVote} />
+                <Vote currentUser={this.props.currentUser} answerId={this.props.id} votes={this.props.votes} score={this.props.score} onVote={this.props.onVote} />
 
             </article>
         );
