@@ -4,6 +4,7 @@ FROM node:10.12 AS dev
 WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .
@@ -19,6 +20,8 @@ RUN npm run build
 
 # PRODUCTION ENVIRONMENT
 FROM nginx:1.15 AS production
+
+COPY nginx /etc/nginx
 
 COPY --from=build /app/build /usr/share/nginx/html
 
