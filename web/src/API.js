@@ -24,6 +24,12 @@ class API {
 
         return response.data;
     }
+
+    async createAnswer(answer) {
+        const response = await this.axios.post('answers', answer);
+
+        return response.data;
+    }
 }
 
 export default new API();

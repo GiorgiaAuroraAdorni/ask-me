@@ -8,6 +8,7 @@ import CreateQuestion from "./CreateQuestion";
 import QuestionList from "./QuestionList";
 import Question from "./Question";
 import AnswerList from "./AnswerList";
+import CreateAnswer from "./CreateAnswer";
 
 class App extends Component {
     constructor(props) {
@@ -112,50 +113,50 @@ class QuestionDetail extends Component {
             question: null,
             answers: null,
         };
+
+        this.handleCreateAnswer = this.handleCreateAnswer.bind(this);
     }
 
     async componentDidMount() {
         const id = this.props.match.params.id;
         const question = await api.loadQuestion(id);
+        const answers = question.answers;
 
-        this.setState({ question });
+        this.setState({ question, answers });
         document.title = 'AskMe — ' + question.title;
     }
 
-    render() {
-        let question;
-        let answers;
+    async handleCreateAnswer(answer) {
+        answer['user'] = this.props.currentUser;
+        answer['question_id'] = this.state.question.id;
 
+        const newAnswer = await api.createAnswer(answer);
+
+        const answers = this.state.answers.concat([ newAnswer ]);
+        this.setState({ answers });
+    }
+
+    render() {
         if (this.state.question === null) {
-            question = "Loading…";
+            return "Loading…";
 
         } else {
-            question = <Question {...this.state.question} />;
-            answers = <AnswerList answers={this.state.question.answers}/>;
+            const question = <Question {...this.state.question} />;
+            const answers = <AnswerList answers={this.state.answers}/>;
+            let createAnswer;
 
-            return (
-                <div>
-                    {question}
-                    <h2>Answers</h2>
+            if (this.props.currentUser !== null) {
+                createAnswer = <CreateAnswer onCreate={this.handleCreateAnswer} />;
+            }
 
-                    <div className="LoginForm">
-                        <form onSubmit={this.handleSubmit}>
-                            <input type="text" value={this.state.username} placeholder="Username"
-                                   onChange={this.handleChange} required/>
-                            <br/>
-                            <textarea name="body" value={this.state.body} placeholder="Write something…"
-                                      onChange={this.handleChange} required/>
-                            <br/>
-                            <input type="submit" value="Submit"/>
-                        </form>
-
-                    </div>
-
-
-                    {answers}
-                </div>
+        return (
+            <div>
+                {question}
+                <h2>Answers</h2>
+                {createAnswer}
+                {answers}
+            </div>
             );
         }
-        return question;
     }
 }
