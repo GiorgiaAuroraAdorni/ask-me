@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import api from "./API";
 
 class Vote extends Component {
 
