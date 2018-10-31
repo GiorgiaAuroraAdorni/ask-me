@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnswerList renders correctly 1`] = `
+Array [
+  <div
+    className="AnswerItem"
+    key="2"
+  >
+    <Answer
+      _links={
+        Object {
+          "self": "answers/2",
+        }
+      }
+      body="corpo della risposta"
+      id={2}
+      question_id={1}
+      score={0}
+      user="utente2"
+      votes={
+        Array [
+          Object {
+            "_links": Object {},
+            "answer_id": 2,
+            "user": "gio",
+            "value": -1,
+          },
+          Object {
+            "_links": Object {},
+            "answer_id": 2,
+            "user": "fghj",
+            "value": 1,
+          },
+        ]
+      }
+    />
+  </div>,
+  <div
+    className="AnswerItem"
+    key="1"
+  >
+    <Answer
+      _links={
+        Object {
+          "self": "answers/1",
+        }
+      }
+      body="corpo della risposta"
+      id={1}
+      question_id={1}
+      score={2}
+      user="utente"
+      votes={
+        Array [
+          Object {
+            "_links": Object {},
+            "answer_id": 1,
+            "user": "gio",
+            "value": 1,
+          },
+          Object {
+            "_links": Object {},
+            "answer_id": 1,
+            "user": "fghj",
+            "value": 1,
+          },
+        ]
+      }
+    />
+  </div>,
+]
+`;
