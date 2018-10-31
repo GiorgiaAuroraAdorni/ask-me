@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateQuestion renders correctly 1`] = `
+<div
+  className="Vote"
+>
+  <button
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬆︎
+  </button>
+  <button
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬇︎
+  </button>
+  2
+   votes
+</div>
+`;
+
+exports[`CreateQuestion renders correctly 2`] = `
+<div
+  className="Vote"
+>
+  <button
+    className=""
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬆︎
+  </button>
+  <button
+    className="selected"
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬇︎
+  </button>
+  2
+   votes
+</div>
+`;
+
+exports[`CreateQuestion renders correctly 3`] = `
+<div
+  className="Vote"
+>
+  <button
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬆︎
+  </button>
+  <button
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬇︎
+  </button>
+  2
+   votes
+</div>
+`;
+
+exports[`CreateQuestion renders correctly 4`] = `
+<div
+  className="Vote"
+>
+  <button
+    className="selected"
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬆︎
+  </button>
+  <button
+    className=""
+    disabled={false}
+    onClick={[Function]}
+  >
+    ⬇︎
+  </button>
+  2
+   votes
+</div>
+`;
+
+exports[`CreateQuestion renders correctly 5`] = `
+<div
+  className="Vote"
+>
+  <button
+    disabled={true}
+    onClick={[Function]}
+  >
+    ⬆︎
+  </button>
+  <button
+    disabled={true}
+    onClick={[Function]}
+  >
+    ⬇︎
+  </button>
+  2
+   votes
+</div>
+`;
