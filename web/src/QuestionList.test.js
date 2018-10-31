@@ -19,7 +19,7 @@ describe('QuestionList', () => {
                 _links: {self: 'questions/2'}
             },
             {
-                id: 2,
+                id: 3,
                 title: 'un titolo',
                 body: 'un po di testo',
                 user: 'qualcuno',

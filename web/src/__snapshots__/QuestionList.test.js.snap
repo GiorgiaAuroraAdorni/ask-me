@@ -4,7 +4,7 @@ exports[`QuestionList renders correctly 1`] = `
 Array [
   <div
     className="QuestionItem"
-    key="2"
+    key="3"
   >
     <Question
       _links={
@@ -13,7 +13,7 @@ Array [
         }
       }
       body="un po di testo"
-      id={2}
+      id={3}
       title="un titolo"
       user="qualcuno"
     />
