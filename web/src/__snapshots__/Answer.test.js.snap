@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Answer renders correctly 1`] = `
+<article
+  className="Answer"
+>
+  <header>
+    <h4>
+      answered by 
+      utente
+    </h4>
+  </header>
+  <p>
+    corpo della risposta
+  </p>
+  <Vote />
+</article>
+`;
