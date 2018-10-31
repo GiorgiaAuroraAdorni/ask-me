@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Vote from "./Vote";
 
 class Answer extends Component {
     render() {
@@ -10,6 +11,9 @@ class Answer extends Component {
                 </header>
 
                 <p>{this.props.body}</p>
+
+                <Vote currentUser={this.props.currentUser} answerId={this.props.id} score={this.props.score} onVote={this.props.onVote} />
+
             </article>
         );
     }

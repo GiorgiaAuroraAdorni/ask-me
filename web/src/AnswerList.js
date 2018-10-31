@@ -7,7 +7,7 @@ class AnswerList extends Component {
     render() {
         const answerList = this.props.answers.map((answer) =>
             <div className="AnswerItem" key={answer.id}>
-                <Answer {...answer} />
+                <Answer {...answer} currentUser={this.props.currentUser} onVote={this.props.onVote} />
             </div>
         );
 

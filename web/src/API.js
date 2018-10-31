@@ -30,6 +30,12 @@ class API {
 
         return response.data;
     }
+
+    async createVote(vote) {
+        const response = await this.axios.post('votes', vote);
+
+        return response.data;
+    }
 }
 
 export default new API();

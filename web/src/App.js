@@ -9,6 +9,7 @@ import QuestionList from "./QuestionList";
 import Question from "./Question";
 import AnswerList from "./AnswerList";
 import CreateAnswer from "./CreateAnswer";
+import Vote from "./Vote";
 
 class App extends Component {
     constructor(props) {
@@ -115,6 +116,7 @@ class QuestionDetail extends Component {
         };
 
         this.handleCreateAnswer = this.handleCreateAnswer.bind(this);
+        this.handleVote = this.handleVote.bind(this);
     }
 
     async componentDidMount() {
@@ -136,13 +138,17 @@ class QuestionDetail extends Component {
         this.setState({ answers });
     }
 
+    async handleVote(vote) {
+        const newVote = await api.createVote(vote);
+    }
+
     render() {
         if (this.state.question === null) {
             return "Loading…";
 
         } else {
             const question = <Question {...this.state.question} />;
-            const answers = <AnswerList answers={this.state.answers}/>;
+            const answers = <AnswerList answers={this.state.answers} currentUser={this.props.currentUser} onVote={this.handleVote}/>;
             let createAnswer;
 
             if (this.props.currentUser !== null) {
