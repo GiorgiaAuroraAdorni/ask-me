@@ -27,7 +27,7 @@ class Question(db.Model):
         }
 
         if answers:
-            data['answers'] = [a.to_dict() for a in self.answers]
+            data['answers'] = [a.to_dict(votes=True) for a in self.answers]
 
         return data
 
