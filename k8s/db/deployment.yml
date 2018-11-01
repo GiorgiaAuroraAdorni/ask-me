@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+  labels:
+    app: db
+    pruneTag: askme
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:10
+        volumeMounts:
+        - name: db-storage
+          mountPath: /var/lib/postgresql/data
+        env:
+          - name: POSTGRES_PASSWORD
+            value: secret
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+      volumes:
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: db-storage-claim

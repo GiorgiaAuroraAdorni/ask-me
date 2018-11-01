@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  labels:
+    app: api
+    pruneTag: askme
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+        forceReloadRevision: v2
+    spec:
+      containers:
+      - name: api
+        image: registry.gitlab.com/giorgiaauroraadorni/askme/api:master
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env:
+          - name: DATABASE_URL
+            value: postgresql://postgres:secret@db-service/postgres
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 5000

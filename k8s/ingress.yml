@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  labels:
+    pruneTag: askme
+  annotations:
+    ingress.gcp.kubernetes.io/pre-shared-cert: 'askme-cereda-me'
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api/*
+        backend:
+          serviceName: api-service
+          servicePort: 80
+  backend:
+    serviceName: web-service
+    servicePort: 80
