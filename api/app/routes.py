@@ -7,6 +7,11 @@ from .models import Question, Answer, Vote
 bp = Blueprint('api', __name__)
 
 
+@bp.route('/')
+def health_check():
+    return 'The sun is shining today!'
+
+
 @bp.route('/questions')
 def list_questions():
     questions = [q.to_dict() for q in Question.query.all()]
