@@ -17,6 +17,6 @@ def create_app(config=config.Config):
     migrate.init_app(app, db)
     cors.init_app(app)
 
-    app.register_blueprint(routes.bp, url_prefix='/api')
+    app.register_blueprint(routes.bp, url_prefix=app.config['API_URL_PREFIX'])
 
     return app

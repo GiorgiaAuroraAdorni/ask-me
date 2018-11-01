@@ -14,6 +14,7 @@ def enforce_foreign_keys(dbapi_connection, connection_record):
 class TestConfig(config.Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    API_URL_PREFIX = '/'
 
 
 @pytest.fixture
