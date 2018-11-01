@@ -1,15 +1,25 @@
 from flask import Blueprint, jsonify, request, url_for
 
 from . import db
-from .errors import bad_request
+from .errors import bad_request, service_unavailable
 from .models import Question, Answer, Vote
 
 bp = Blueprint('api', __name__)
 
 
-@bp.route('/')
+@bp.route('/health')
 def health_check():
-    return 'The sun is shining today!'
+    try:
+        alive = db.session \
+            .query('alive') \
+            .from_statement(db.text('SELECT true AS alive')) \
+            .scalar()
+
+        assert alive
+
+        return jsonify(success='The sun is shining today!')
+    except:
+        return service_unavailable('Unable to connect to the database.')
 
 
 @bp.route('/questions')
