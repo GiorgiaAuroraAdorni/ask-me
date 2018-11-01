@@ -19,7 +19,7 @@ Array [
     />
     <Link
       replace={false}
-      to="questions/3"
+      to="/questions/3"
     >
       <button>
         Read answers
@@ -43,7 +43,7 @@ Array [
     />
     <Link
       replace={false}
-      to="questions/2"
+      to="/questions/2"
     >
       <button>
         Read answers
@@ -67,7 +67,7 @@ Array [
     />
     <Link
       replace={false}
-      to="questions/1"
+      to="/questions/1"
     >
       <button>
         Read answers

@@ -38,7 +38,7 @@ services:
      - "3000:3000"
     environment:
      - CHOKIDAR_USEPOLLING=1
-     - REACT_APP_API_URL=http://localhost:5000/
+     - REACT_APP_API_URL=http://localhost:5000/api/
     volumes:
      - ./web/public:/app/public:rw
      - ./web/src:/app/src:rw

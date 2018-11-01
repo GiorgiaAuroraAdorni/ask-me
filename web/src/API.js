@@ -20,7 +20,7 @@ class API {
     }
 
     async loadQuestion(id) {
-        const response = await this.axios.get('questions/' + id);
+        const response = await this.axios.get(`questions/${id}`);
 
         return response.data;
     }

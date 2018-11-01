@@ -8,7 +8,7 @@ class QuestionList extends Component {
         const questionList = this.props.questions.map((question) =>
             <div className="QuestionItem" key={question.id}>
                 <Question {...question} />
-                <Link to={question._links.self}>
+                <Link to={`/questions/${question.id}`}>
                     <button>Read answers</button>
                 </Link>
             </div>
