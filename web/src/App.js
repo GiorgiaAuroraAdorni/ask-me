@@ -92,7 +92,7 @@ class Questions extends Component {
         }
 
         if (this.state.questions === null) {
-            questions = "Loading…";
+            questions = <Loading title="Loading questions…"/>;
         } else {
             questions = <QuestionList questions={this.state.questions} />;
         }
@@ -144,7 +144,7 @@ class QuestionDetail extends Component {
 
     render() {
         if (this.state.question === null) {
-            return "Loading…";
+            return <Loading title="Loading question…" />;
 
         } else {
             const question = <Question {...this.state.question} />;
@@ -165,4 +165,12 @@ class QuestionDetail extends Component {
             );
         }
     }
+}
+
+function Loading(props) {
+    return (
+        <div className="Loading">
+            <h3>{props.title}</h3>
+        </div>
+    );
 }
