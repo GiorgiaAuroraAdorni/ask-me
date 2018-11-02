@@ -5,13 +5,13 @@ services:
 
 stages:
  - build
- - test
- - release
+ - deploy
 
 before_script:
  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build_api:
+  stage: build
   variables:
     IMAGE_TEST_TAG: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
     IMAGE_RELEASE_TAG: $CI_REGISTRY_IMAGE/api:latest
@@ -21,6 +21,7 @@ build_api:
     - docker push $IMAGE_TEST_TAG
 
 build_web:
+  stage: build
   variables:
     IMAGE_DEV_TAG: $CI_REGISTRY_IMAGE/web/dev:$CI_COMMIT_REF_SLUG
     IMAGE_PROD_TAG: $CI_REGISTRY_IMAGE/web:$CI_COMMIT_REF_SLUG
@@ -30,3 +31,13 @@ build_web:
     - docker run -e CI $IMAGE_DEV_TAG npm test
     - docker build -t $IMAGE_PROD_TAG web/
     - docker push $IMAGE_PROD_TAG
+
+deploy:
+  stage: deploy
+  script:
+    - k8s/bin/deploy.sh
+  environment:
+    name: production
+    url: https://askme.cereda.me
+  only:
+  - master
