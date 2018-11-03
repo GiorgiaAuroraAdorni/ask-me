@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import update from "immutability-helper";
 import './App.css';
 
 import api from "./API";
@@ -9,7 +10,6 @@ import QuestionList from "./QuestionList";
 import Question from "./Question";
 import AnswerList from "./AnswerList";
 import CreateAnswer from "./CreateAnswer";
-import Vote from "./Vote";
 
 class App extends Component {
     constructor(props) {
@@ -112,7 +112,6 @@ class QuestionDetail extends Component {
 
         this.state = {
             question: null,
-            answers: null,
         };
 
         this.handleCreateAnswer = this.handleCreateAnswer.bind(this);
@@ -122,9 +121,8 @@ class QuestionDetail extends Component {
     async componentDidMount() {
         const id = this.props.match.params.id;
         const question = await api.loadQuestion(id);
-        const answers = question.answers;
 
-        this.setState({ question, answers });
+        this.setState({ question });
         document.title = 'AskMe — ' + question.title;
     }
 
@@ -134,12 +132,50 @@ class QuestionDetail extends Component {
 
         const newAnswer = await api.createAnswer(answer);
 
-        const answers = this.state.answers.concat([ newAnswer ]);
-        this.setState({ answers });
+        this.setState(function (state, props) {
+            const question = update(state.question, {
+                answers: {$push: [newAnswer]}
+            });
+
+            return {question};
+        });
     }
 
     async handleVote(vote) {
         const newVote = await api.createVote(vote);
+
+        this.setState(function (state, props) {
+            let question = state.question;
+            const answerIdx = question.answers.findIndex((a) => a.id === vote.answer_id);
+            const answer = question.answers[answerIdx];
+            const currentVoteIdx = answer.votes.findIndex((v) => v.user === props.currentUser);
+
+            if (currentVoteIdx === -1) {
+                question = update(question, {
+                    answers: {
+                        [answerIdx]: {
+                            score: {$set: answer.score + newVote.value},
+                            votes: {$push: [newVote]}
+                        }
+                    }
+                });
+            } else {
+                const currentVote = answer.votes[currentVoteIdx];
+
+                question = update(question, {
+                    answers: {
+                        [answerIdx]: {
+                            score: {$set: answer.score - currentVote.value + newVote.value},
+                            votes: {
+                                [currentVoteIdx]: {$set: newVote}
+                            }
+                        }
+                    }
+                });
+            }
+
+            return {question};
+        });
     }
 
     render() {
@@ -148,7 +184,7 @@ class QuestionDetail extends Component {
 
         } else {
             const question = <Question {...this.state.question} />;
-            const answers = <AnswerList answers={this.state.answers} currentUser={this.props.currentUser} onVote={this.handleVote}/>;
+            const answers = <AnswerList answers={this.state.question.answers} currentUser={this.props.currentUser} onVote={this.handleVote}/>;
             let createAnswer;
 
             if (this.props.currentUser !== null) {

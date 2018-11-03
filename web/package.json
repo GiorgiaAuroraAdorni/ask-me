@@ -11,7 +11,8 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "enzyme-to-json": "^3.3.4",
-    "sinon": "^7.1.0"
+    "sinon": "^7.1.0",
+    "immutability-helper": "^2.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
