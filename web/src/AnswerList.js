@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import Question from "./Question";
 import Answer from "./Answer";
 
 class AnswerList extends Component {
