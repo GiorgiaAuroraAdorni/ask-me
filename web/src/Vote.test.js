@@ -5,7 +5,7 @@ describe('CreateQuestion', () => {
     it('renders correctly', () => {
         let wrapper;
 
-        wrapper = shallow(<Vote currentUser="Giorgia" score={2} votes={[]}/>);
+        wrapper = shallow(<Vote currentUser="Giorgia" score={0} votes={[]}/>);
         expect(wrapper).toMatchSnapshot();
 
         let votes;
@@ -25,7 +25,7 @@ describe('CreateQuestion', () => {
             }
         ];
 
-        wrapper = shallow(<Vote currentUser="Giorgia" score={2} votes={votes}/>);
+        wrapper = shallow(<Vote currentUser="Giorgia" score={0} votes={votes}/>);
         expect(wrapper).toMatchSnapshot();
 
         votes = [
@@ -33,7 +33,7 @@ describe('CreateQuestion', () => {
                 "_links": {},
                 "answer_id": 2,
                 "user": "asd",
-                "value": -1
+                "value": 1
             },
             {
                 "_links": {},
@@ -51,20 +51,20 @@ describe('CreateQuestion', () => {
                 "_links": {},
                 "answer_id": 2,
                 "user": "Giorgia",
-                "value": +1
+                "value": -1
             },
             {
                 "_links": {},
                 "answer_id": 2,
                 "user": "fghj",
-                "value": 1
+                "value": -1
             }
         ];
 
-        wrapper = shallow(<Vote currentUser="Giorgia" score={2} votes={votes}/>);
+        wrapper = shallow(<Vote currentUser="Giorgia" score={-2} votes={votes}/>);
         expect(wrapper).toMatchSnapshot();
 
-        wrapper = shallow(<Vote currentUser={null} score={2}/>);
+        wrapper = shallow(<Vote currentUser={null} score={0}/>);
         expect(wrapper).toMatchSnapshot();
     });
 });

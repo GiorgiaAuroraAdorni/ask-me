@@ -16,7 +16,9 @@ exports[`CreateQuestion renders correctly 1`] = `
   >
     ⬇︎
   </button>
-  2
+  <span>
+      0
+  </span>
    votes
 </div>
 `;
@@ -39,7 +41,9 @@ exports[`CreateQuestion renders correctly 2`] = `
   >
     ⬇︎
   </button>
-  2
+  <span>
+      0
+  </span>
    votes
 </div>
 `;
@@ -60,7 +64,10 @@ exports[`CreateQuestion renders correctly 3`] = `
   >
     ⬇︎
   </button>
-  2
+  <span>
+    +
+    2
+  </span>
    votes
 </div>
 `;
@@ -70,20 +77,23 @@ exports[`CreateQuestion renders correctly 4`] = `
   className="Vote"
 >
   <button
-    className="selected"
+    className=""
     disabled={false}
     onClick={[Function]}
   >
     ⬆︎
   </button>
   <button
-    className=""
+    className="selected"
     disabled={false}
     onClick={[Function]}
   >
     ⬇︎
   </button>
-  2
+  <span>
+    −
+    2
+  </span>
    votes
 </div>
 `;
@@ -104,7 +114,9 @@ exports[`CreateQuestion renders correctly 5`] = `
   >
     ⬇︎
   </button>
-  2
+  <span>
+      0
+  </span>
    votes
 </div>
 `;

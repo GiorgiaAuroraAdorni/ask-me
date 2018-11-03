@@ -8,6 +8,18 @@ class Vote extends Component {
                             answer_id: this.props.answerId });
     }
 
+    formattedScore() {
+        const score = this.props.score;
+
+        if (score > 0) {
+            return <span>+{score}</span>;
+        } else if (score === 0) {
+            return <span>&nbsp;&nbsp;0</span>;
+        } else {
+            return <span>−{-score}</span>;
+        }
+    }
+
     render() {
         const isLoggedIn = (this.props.currentUser !== null);
 
@@ -28,7 +40,7 @@ class Vote extends Component {
                 <button className={upvote} disabled={!isLoggedIn} onClick={() => this.handleClick(+1)}>⬆︎</button>
                 <button className={downvote} disabled={!isLoggedIn} onClick={() => this.handleClick(-1)}>⬇︎</button>
 
-                {this.props.score} votes
+                {this.formattedScore()} votes
             </div>
         );
     }
