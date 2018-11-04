@@ -14,7 +14,6 @@ build_api:
   stage: build
   variables:
     IMAGE_TEST_TAG: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
-    IMAGE_RELEASE_TAG: $CI_REGISTRY_IMAGE/api:latest
   script:
     - docker build -t $IMAGE_TEST_TAG api/
     - docker run $IMAGE_TEST_TAG python -m pytest
@@ -25,7 +24,6 @@ build_web:
   variables:
     IMAGE_DEV_TAG: $CI_REGISTRY_IMAGE/web/dev:$CI_COMMIT_REF_SLUG
     IMAGE_PROD_TAG: $CI_REGISTRY_IMAGE/web:$CI_COMMIT_REF_SLUG
-    IMAGE_RELEASE_TAG: $CI_REGISTRY_IMAGE/web:latest
   script:
     - docker build -t $IMAGE_DEV_TAG --target dev web/
     - docker run -e CI $IMAGE_DEV_TAG npm test
