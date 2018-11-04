@@ -42,15 +42,29 @@ web server (such as Nginx) in production. Copying only the compiled files to
 production allowed us to create extremely small and efficient images.
 
 
-## Continuous Integration
+## Continuous Integration / Continuous Deployment
 We wrote tests for the API server with pytest and for the web interface with the
 tools provided by React.
 
-Using GitLab CI, we have set up a pipeline of Continuous Integration that
-builds Docker images, runs the tests and publishes the images to GitLab 
-Container Registry after every commit.
+Using GitLab CI, we have set up a pipeline of Continuous Integration that runs after every commit: 
+ * building Docker images
+ * running unit tests
+ * publishing images to GitLab Container Registry
 
-## Deployment and Provisioning
+With Continuous Deployment, commits that successfully pass all stages of the CI pipeline 
+are published to the production environment automatically.
+This ensures that only functioning builds are released to the customers.
+
+In `.gitlab-ci.yml` file we configure the three stages of our pipeline: build, test, and deploy.
+On any push GitLab will look for the `.gitlab-ci.yml` file and start jobs on Runners 
+according to the contents of the file, for that commit.
+
+GitLab interface provides a visualization of the pipeline status.   
+SCREEEEEN
+
+![alt text](file:///Users/Giorgia/Desktop/Env-production.jpg)
+
+## Provisioning
 We plan to complement the CI pipeline that we've already built with automation 
 for deploying the containers to a Kubernetes cluster hosted on 
 [GARR Cloud](https://cloud.garr.it/containers/).
