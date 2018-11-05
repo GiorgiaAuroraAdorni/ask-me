@@ -182,19 +182,20 @@ Autoscaling
 
 At present, no monitoring activity is carried out, even if, using some tools 
 integrated with Google Cloud, it's possible to conduct analysis and management 
-of services/containers/applications.
+of containerized applications.
 
-1. **Uptime monitoring**: the tool (Stackdriver Monitoring) allows the display/visualization of 
-significant/meaningful information, automatically collected, such as performance, activity 
-time and overall status of applications running in the cloud environment, in the 
-form of dashboards, graphs and alerts.
+1. **Uptime monitoring**: [Stackdriver Monitoring](https://cloud.google.com/monitoring/?hl=it) 
+allows to visualize significant information, automatically collected, such as performance, 
+activity time and overall status of applications running in the cloud environment, 
+in the form of dashboards, graphs and alerts.
 
-2. **Logging**: the tool (Stackdriver Logging) allows to store, search, analyze 
-in real time and create alerts for data and events of Google Cloud Platform logs.
+2. **Logging**: [Stackdriver Logging](https://cloud.google.com/logging/?hl=it) 
+allows to store, search, analyze the real time and create alerts for data and 
+events of Google Cloud Platform logs.
 
-3. **Debugger**: the tool (Stackdriver Debugger) links/connects the production data 
-to the source code, analyzing in real time status and functionality 
-of the application running in the production environment, without stopping or 
-slowing down requests (users don't suffer slowdowns).
-This's useful for understanding the behavior of the code in production, 
-and for analyzing its status in order to find hard-to-find bugs.
+3. **Debugger**: [Stackdriver Debugger](https://cloud.google.com/debugger/?hl=it)
+links the production data to the source code, analyzing in real time status and 
+functionality of the application running in the production environment, without 
+stopping or slowing down requests (users don't suffer slowdowns).
+This is useful for understanding the behavior of the code in production, 
+and for analyzing its state in order to debug hard-to-reproduce bugs.
