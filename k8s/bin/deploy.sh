@@ -12,7 +12,5 @@ cd k8s/
 
 kubectl cluster-info
 
-PATCH_REQUEST='{"spec": {"template":  {"metadata": {"labels": {"gitCommit": "${CI_COMMIT_SHA}"}}}}}'
-
-kubectl patch -f api/deployment.yml -p "$(echo ${PATCH_REQUEST} | envsubst)"
-kubectl patch -f web/deployment.yml -p "$(echo ${PATCH_REQUEST} | envsubst)"
+kubectl patch -f api/deployment.yml -p "$(cat api/deployment.yml.patch | envsubst)"
+kubectl patch -f web/deployment.yml -p "$(cat web/deployment.yml.patch | envsubst)"

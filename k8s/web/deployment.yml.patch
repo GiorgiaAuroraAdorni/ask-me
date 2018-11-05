@@ -1,0 +1,9 @@
+spec:
+  template:
+    metadata:
+      labels:
+        gitCommit: $CI_COMMIT_SHA
+    spec:
+      containers:
+      - name: web
+        image: registry.gitlab.com/giorgiaauroraadorni/askme/web:$CI_COMMIT_SHA
