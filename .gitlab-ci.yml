@@ -10,25 +10,34 @@ stages:
 before_script:
  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
+variables:
+  IMAGE_NAME: $CI_REGISTRY_IMAGE/$COMPONENT
+  IMAGE_COMMIT_TAG: $CI_REGISTRY_IMAGE/$COMPONENT:$CI_COMMIT_SHA
+  IMAGE_BRANCH_TAG: $CI_REGISTRY_IMAGE/$COMPONENT:$CI_COMMIT_REF_SLUG
+
 build_api:
   stage: build
   variables:
-    IMAGE_TEST_TAG: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
+    COMPONENT: api
   script:
-    - docker build -t $IMAGE_TEST_TAG api/
-    - docker run $IMAGE_TEST_TAG python -m pytest
-    - docker push $IMAGE_TEST_TAG
+    - docker build -t $IMAGE_COMMIT_TAG api/
+    - docker run $IMAGE_COMMIT_TAG python -m pytest
+
+    - docker tag $IMAGE_COMMIT_TAG $IMAGE_BRANCH_TAG
+    - docker push $IMAGE_NAME
 
 build_web:
   stage: build
   variables:
-    IMAGE_DEV_TAG: $CI_REGISTRY_IMAGE/web/dev:$CI_COMMIT_REF_SLUG
-    IMAGE_PROD_TAG: $CI_REGISTRY_IMAGE/web:$CI_COMMIT_REF_SLUG
+    COMPONENT: web
   script:
-    - docker build -t $IMAGE_DEV_TAG --target dev web/
-    - docker run -e CI $IMAGE_DEV_TAG npm test
-    - docker build -t $IMAGE_PROD_TAG web/
-    - docker push $IMAGE_PROD_TAG
+    - docker build -t web/dev --target dev web/
+    - docker run -e CI web/dev npm test
+    
+    - docker build -t $IMAGE_COMMIT_TAG web/
+
+    - docker tag $IMAGE_COMMIT_TAG $IMAGE_BRANCH_TAG
+    - docker push $IMAGE_NAME
 
 deploy:
   stage: deploy
