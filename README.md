@@ -77,13 +77,27 @@ according to the contents of the file, for that commit.
 
 
 ## Provisioning
-We plan to complement the CI pipeline that we've already built with automation 
-for deploying the containers to a Kubernetes cluster hosted on 
-[GARR Cloud](https://cloud.garr.it/containers/).
+We originally planned to deploy our application to a shared Kubernetes cluster
+offered by [GARR Cloud](https://cloud.garr.it/containers/). Unfortunately, due 
+to the multi-tenant nature of the cluster, we didn't have the authorizations to 
+perform some actions and we needed assistance from GARR. The most significant 
+problem we encountered was provisioning persistent storage for our database in 
+Kubernetes.
 
-GitLab's integration with Kubernetes should allow us to build an end-to-end 
-DevOps process for our application, that starts from a commit pushed to the 
-repository and ends with a set of containers running in production.
+Since the deadline for this assignment coincided with the week of November 1st, 
+we couldn't get an answer in time from GARR and we decided to use another service 
+to deploy our application.
+
+We choose to use Google Cloud for two main reasons:
+ * They offer a very strong managed service, called 
+   [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/), that
+   allows to run containerized applications without having to manually install a
+   Kubernetes cluster. It natively supports auto-scaling for both Pods and Nodes, 
+   even across multiple zones in a Google Cloud region for fault tolerance and
+   high availability.
+ * They use an attractive pricing scheme that includes 300$ of credit for new 
+   users and no charge for using GKE beyond the cost of the virtual machines 
+   used as Kubernetes Nodes.
 
 
-#Future works
+## Future developments
