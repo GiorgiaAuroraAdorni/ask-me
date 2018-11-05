@@ -3,11 +3,13 @@
 AskMe is a simple Q&A application built on the model of StackOverflow. It
 supports asking questions, posting answers and up- or down-voting existing answers.
 
-The running web app is available at
-[https://askme.cereda.me/](https://askme.cereda.me/).
+The production web application is available at
+[https://askme.cereda.me/](https://askme.cereda.me/). 
 
-Dire qualcosa riguardo il fatto che l'app non sia sempre online a causa del 
-pagamento di google cloud.
+**NOTE:** since the application is deployed on Google Cloud, which is a paid 
+service, we're not leaving it online at all times. We plan to show it in action 
+at the project demo, but if you would like to access it beforehand, please 
+contact us and we will gladly start the server.
 
 #### Repository
 The source code is available on GitLab at
@@ -176,9 +178,6 @@ it's almost overkill for our purposes. Its features include:
   our API server and all other requests to our web server. 
 
 ## Future developments
-
-DB replication
-Autoscaling
 
 At present, no monitoring activity is carried out, even if, using some tools 
 integrated with Google Cloud, it's possible to conduct analysis and management 
