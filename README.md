@@ -3,6 +3,12 @@
 AskMe is a simple Q&A application built on the model of StackOverflow. It
 supports asking questions, posting answers and up- or down-voting existing answers.
 
+The running web app is available at
+[https://askme.cereda.me/](https://askme.cereda.me/).
+
+Dire qualcosa riguardo il fatto che l'app non sia sempre online a causa del 
+pagamento di google cloud.
+
 #### Repository
 The source code is available on GitLab at
 [https://gitlab.com/GiorgiaAuroraAdorni/askme/](https://gitlab.com/GiorgiaAuroraAdorni/askme/).
@@ -68,8 +74,8 @@ In `.gitlab-ci.yml` file we configure the three stages of our pipeline: build, t
 On any push GitLab will look for the `.gitlab-ci.yml` file and start jobs on Runners 
 according to the contents of the file, for that commit.
 
-GitLab interface provides a visualization of the pipeline status.   
-
+GitLab interface provides a visualization of the pipeline status. 
+This screen displays the deployment history, and allows re-deployment and rollback.
 ![alt text](docs/images/Env-production.jpg)
 
 ## Provisioning
@@ -153,4 +159,27 @@ it's almost overkill for our purposes. Its features include:
 
 ## Future developments
 
-Monitoring
+At present, no monitoring activity is carried out, even if, using some tools 
+integrated with Google Cloud, it's possible to conduct analysis and management 
+of services/containers/applications.
+
+1. **Uptime monitoring**: the tool (Stackdriver Monitoring) allows the display/visualization of 
+significant/meaningful information, automatically collected, such as performance, activity 
+time and overall status of applications running in the cloud environment, in the 
+form of dashboards, graphs and alerts.
+
+2. **Logging**: the tool (Stackdriver Logging) allows to store, search, analyze 
+in real time and create alerts for data and events of Google Cloud Platform logs.
+
+3. **Debugger**: the tool (Stackdriver Debugger) links/connects the production data 
+to the source code, analyzing in real time status and functionality 
+of the application running in the production environment, without stopping or 
+slowing down requests (users don't suffer slowdowns).
+This's useful for understanding the behavior of the code in production, 
+and for analyzing its status in order to find hard-to-find bugs.
+
+## Development setup
+
+procedura per clonare e runnare l'app
+
+test e deployment
