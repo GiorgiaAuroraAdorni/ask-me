@@ -62,11 +62,9 @@ This ensures that only functioning builds are released to the customers.
 
 ![alt text](docs/images/deploy running pipelines.jpg)
 
-
 In `.gitlab-ci.yml` file we configure the three stages of our pipeline: build, test, and deploy.
 On any push GitLab will look for the `.gitlab-ci.yml` file and start jobs on Runners 
 according to the contents of the file, for that commit.
-
 
 GitLab interface provides a visualization of the pipeline status.   
 
@@ -102,7 +100,9 @@ set up our cluster and some shell scripts we wrote to manage it:
  * `gke-cluster-resume.sh` resumes the cluster by recreating the resources that were deleted 
  * `deploy.sh` is used by our CI/CD pipeline to update the images used by an existing deployment
 
-![alt text](docs/images/architecture_2.png)
+This is a diagram that describes the architecture of our production environment:
+![Architecture of the production environment](docs/images/architecture_2.png)
+
 ## Future developments
 
 Monitoring
