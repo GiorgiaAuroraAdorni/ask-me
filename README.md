@@ -32,15 +32,33 @@ that exposes the REST API used by the frontend.
 * **database:** a PostgreSQL instance responsible for persistently storing 
 the users' data.
 
+## Development setup
+Thanks to Docker Compose, the process of setting up a local development
+environment is extremely streamlined. These three commands are all that it's 
+needed to spin up and debug the application:
+
+```
+$ git clone https://gitlab.com/GiorgiaAuroraAdorni/askme.git
+$ cd askme
+$ docker-compose up
+```
+
+The web interface will be available at [http://localhost:3000/](http://localhost:3000/)
+and the API server will be available at [http://localhost:5000/api/](http://localhost:5000/api/).
+In addition, our `docker-compose.yml` file also starts an instance of pgAdmin to
+access the database directly: you can reach it at [http://localhost:5005/](http://localhost:5005/).
+
+Docker Compose also allows to locally run the unit tests for both the web interface and API server:
+
+```
+$ docker-compose run api python -m pytest
+$ docker-compose run web npm test
+```
+
 ## Containerization
 We use Docker to containerize each of the three components. This allows us to 
 simplify the setup process of the development environment and to create deployable 
 images that contain all dependencies needed by a component. 
-
-Thanks to Docker Compose, developers are able to spin up and debug the various 
-containers of the application with a single `docker-compose up` command.
-In addition, our `docker-compose.yml` file also starts an instance of pgAdmin to
-enable direct access to the database.
 
 We wrote the `Dockerfile`s to take advantage of
 [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build)
@@ -159,6 +177,9 @@ it's almost overkill for our purposes. Its features include:
 
 ## Future developments
 
+DB replication
+Autoscaling
+
 At present, no monitoring activity is carried out, even if, using some tools 
 integrated with Google Cloud, it's possible to conduct analysis and management 
 of services/containers/applications.
@@ -177,9 +198,3 @@ of the application running in the production environment, without stopping or
 slowing down requests (users don't suffer slowdowns).
 This's useful for understanding the behavior of the code in production, 
 and for analyzing its status in order to find hard-to-find bugs.
-
-## Development setup
-
-procedura per clonare e runnare l'app
-
-test e deployment
