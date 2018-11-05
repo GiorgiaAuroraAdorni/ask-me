@@ -127,7 +127,7 @@ set up our cluster and some shell scripts we wrote to manage it:
  * `deploy.sh` is used by our CI/CD pipeline to update the images used by an existing deployment
 
 This diagram describes the architecture of our production environment:
-![Architecture of the production environment](docs/images/architecture_2.png)
+![Architecture of the production environment](docs/images/architecture_1.png)
 
 ### Pods
 Pods are the smallest deployable object represented by Kubernetes: they represent
