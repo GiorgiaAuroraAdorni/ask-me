@@ -10,7 +10,9 @@ The source code is available on GitLab at
 #### Contributors
 This project has been developed by Giorgia Adorni (806787) and Elia Cereda (807539).
 
-#### DevOps aspects 
+#### DevOps aspects
+We decided to address three aspects of the DevOps process:
+
 1. Containerization  
 2. Continuous Integration / Continuous Deployment  
 3. Provisioning
@@ -100,8 +102,54 @@ set up our cluster and some shell scripts we wrote to manage it:
  * `gke-cluster-resume.sh` resumes the cluster by recreating the resources that were deleted 
  * `deploy.sh` is used by our CI/CD pipeline to update the images used by an existing deployment
 
-This is a diagram that describes the architecture of our production environment:
+This diagram describes the architecture of our production environment:
 ![Architecture of the production environment](docs/images/architecture_2.png)
+
+### Pods
+Pods are the smallest deployable object represented by Kubernetes: they represent
+a number of containers that are guaranteed to be scheduled on the same Node. 
+Attached to a Pod are also the resources needed by its containers, such as storage
+volumes and IP addresses. In our case, each Pod runs a single container.
+
+### Deployments
+Deployments describe the desired state of a group of Pods. In particular they 
+specify what Docker image should be used and how many replicas of a Pod should 
+be scheduled. A Deployment monitors its Pods and acts to maintain the desired 
+state: it's able to restart crashed Pods and to perform rolling updates of its
+Pods.
+
+For the web and API Deployments this means being able to schedule whatever 
+number of Pods is required and seamlessly update the images with zero downtime
+for users. If we enabled auto-scaling, it would also be possible to dynamically 
+spin up and shutdown Pods based on the real-time load.
+
+Since the database is a stateful application, achieving scalability is harder 
+than with the other components and it would require cooperation from the DBMS. 
+At the moment our Deployment can only schedule a single database instance.
+
+### Services
+Services provide an abstraction over a set of Pods that expose a certain functionality.
+It allows clients to use a single endpoint, a combination of a virtual IP address
+and a port, to access the service while Kubernetes distributes requests among
+the specific Pods providing it.
+
+Inside the cluster, Kubernetes also provides a dynamic DNS record for each 
+Service that can be used to access it: `db-service`, `api-service`, `web-service`.
+
+### Ingress
+The Ingress provides a single access point for users to connect to the cluster. 
+In the Google Cloud implementation, this is an extremely powerful component and 
+it's almost overkill for our purposes. Its features include:
+* **Global load balancing** that receives traffic on a single anycast IP address
+  and distributes it to the Google Cloud region closest to the user, with 
+  automatic fail-over should a region become unavailable. Given that we only run
+  our cluster in a single region we're not able to take advantage of this.
+* **HTTPS termination** with automatic certificate provisioning from Let's 
+  Encrypt, which allowed us to secure our application with HTTPS at no extra cost
+  and with no changes to our application code.
+* **URL-based mapping** that allows to map requests to the corresponding service
+  based on its URL. We forward requests that begin with `askme.cereda.me/api/` to
+  our API server and all other requests to our web server. 
 
 ## Future developments
 
