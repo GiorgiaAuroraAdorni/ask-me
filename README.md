@@ -98,6 +98,13 @@ We choose to use Google Cloud for two main reasons:
  * They use an attractive pricing scheme that includes 300$ of credit for new 
    users and no charge for using GKE beyond the cost of the virtual machines 
    used as Kubernetes Nodes.
+   
+The `k8s/` folder in the repository contains the Kubernetes manifests we used to
+set up our cluster and some shell scripts we wrote to manage it:
+ * `gke-cluster-create.sh` creates a Kubernetes cluster with a single node on GKE
+ * `gke-cluster-pause.sh` pauses an existing cluster to avoid being charged when not needed
+ * `gke-cluster-resume.sh` resumes the cluster by recreating the resources that were deleted 
+ * `deploy.sh` is used by our CI/CD pipeline to update the images used by an existing deployment
 
 
 ## Future developments
