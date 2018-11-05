@@ -3,12 +3,17 @@
 AskMe is a simple Q&A application built on the model of StackOverflow. It
 supports asking questions, posting answers and up- or down-voting existing answers.
 
+#### Repository
 The source code is available on GitLab at
 [https://gitlab.com/GiorgiaAuroraAdorni/askme/](https://gitlab.com/GiorgiaAuroraAdorni/askme/).
 
 #### Contributors
 This project has been developed by Giorgia Adorni (806787) and Elia Cereda (807539).
 
+#### DevOps aspects 
+1. Containerization  
+2. Continuous Integration / Continuous Deployment  
+3. Provisioning
 
 ## Architecture
 The application has a distributed architecture composed of three main components:
@@ -53,9 +58,9 @@ GitLab interface provides a visualization of the pipeline status.
 
 
 Using GitLab CI, we have set up a pipeline of Continuous Integration that runs after every commit: 
- * building Docker images
+ * building Docker images  
 ![alt text](docs/images/build running pipelines.jpg)
- * running unit tests
+ * running unit tests  
 ![alt text](docs/images/job build.jpg)
  * publishing images to GitLab Container Registry
 
@@ -70,10 +75,6 @@ This ensures that only functioning builds are released to the customers.
 In `.gitlab-ci.yml` file we configure the three stages of our pipeline: build, test, and deploy.
 On any push GitLab will look for the `.gitlab-ci.yml` file and start jobs on Runners 
 according to the contents of the file, for that commit.
-
-![alt text](docs/images/finish pipelines.jpg)
-
-![alt text](docs/images/finish job.jpg)
 
 
 ## Provisioning
@@ -106,5 +107,7 @@ set up our cluster and some shell scripts we wrote to manage it:
  * `gke-cluster-resume.sh` resumes the cluster by recreating the resources that were deleted 
  * `deploy.sh` is used by our CI/CD pipeline to update the images used by an existing deployment
 
-
+![alt text](docs/images/architecture_2.png)
 ## Future developments
+
+Monitoring
