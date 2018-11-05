@@ -68,7 +68,7 @@ With Continuous Deployment, commits that successfully pass all stages of the CI 
 are published to the production environment automatically.
 This ensures that only functioning builds are released to the customers.
 
-![alt text](docs/images/deploy running pipelines.jpg)
+![alt text](docs/images/pipeline.jpg)
 
 In `.gitlab-ci.yml` file we configure the three stages of our pipeline: build, test, and deploy.
 On any push GitLab will look for the `.gitlab-ci.yml` file and start jobs on Runners 
