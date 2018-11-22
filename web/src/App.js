@@ -36,7 +36,7 @@ class App extends Component {
         return (
             <Router>
                 <div className="App">
-                    <h1><Link to="/">AskMe</Link></h1>
+                    <h1><Link to="/">AskMe Anything</Link></h1>
                     <Account currentUser={this.state.currentUser} onLogin={this.handleLogin} />
 
                     <Route
